@@ -1,0 +1,46 @@
+module Multiplxer
+(
+input [63:0] D0, D1,
+input Select,
+output reg [63:0] out
+);
+
+  always @(D0,D1,Select)
+    begin
+      if(Select==1'b0) 
+        out=D0;
+      else
+        out=D1;
+     end
+endmodule
+
+module Adder
+(
+input [63:0] data1,data2,
+output reg [63:0] sum
+);
+always @(data1,data2)
+  sum=data1+(data2<<1);
+endmodule
+
+module Add4
+(
+input [63:0] data1,
+output reg [63:0] sum
+);
+always @(*)
+  sum=data1+64'b100;
+endmodule
+
+module MuxAnd
+(
+input branch,zero,
+output Muxout
+);
+reg out;
+always @(*)
+  begin
+  out=branch && zero;
+  end
+  assign Muxout=out;
+endmodule
